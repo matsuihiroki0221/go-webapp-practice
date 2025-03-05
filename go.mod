@@ -5,6 +5,17 @@ go 1.23.4
 require (
 	github.com/auth0/go-jwt-middleware/v2 v2.2.2
 	github.com/gin-gonic/gin v1.10.0
+	gorm.io/driver/mysql v1.5.7
+	gorm.io/gorm v1.25.12
+)
+
+require (
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
+	github.com/hashicorp/errwrap v1.1.0 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
+	go.uber.org/atomic v1.7.0 // indirect
 )
 
 require (
@@ -17,6 +28,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.25.0 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
+	github.com/golang-migrate/migrate/v4 v4.18.2
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.9 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect

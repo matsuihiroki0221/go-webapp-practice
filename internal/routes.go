@@ -1,7 +1,7 @@
-package main
+package internal
 
 import (
-	"go-webapp-practice/internal/handlers"
+	"go-webapp-practice/internal/controllers"
 	"go-webapp-practice/internal/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -24,11 +24,14 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	// APIグループ
 	api := r.Group("/api")
 
+	// 依存関係の注入
+
 	// 認証が必要なエンドポイント
 	authRequired := api.Group("/")
 	authRequired.Use(middleware.Auth0Middleware())
 	{
-		authRequired.GET("/users", handlers.GetUsersHandler)
+		authRequired.POST("/users", controllers.UserCtrller.CreateUser)
+		authRequired.GET("/users/:id", controllers.UserCtrller.GetUser)
 	}
 
 	// 該当しないリクエストパスにはindex.htmlを返却

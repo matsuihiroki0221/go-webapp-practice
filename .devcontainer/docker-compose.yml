@@ -34,6 +34,7 @@ services:
     env_file:
       # Ensure that the variables in .env match the same variables in devcontainer.json
       - ./../.env
-
+    ports:
+      - "3306:3306"
     networks:
       - app-network
