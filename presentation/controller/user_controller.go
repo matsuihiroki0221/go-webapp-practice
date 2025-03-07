@@ -1,19 +1,19 @@
-package controllers
+package controller
 
 import (
 	"net/http"
 	"strconv"
 
-	"go-webapp-practice/internal/services"
+	application_service "go-webapp-practice/application_service"
 
 	"github.com/gin-gonic/gin"
 )
 
 type UserController struct {
-	userService *services.UserService
+	userService *application_service.UserService
 }
 
-func NewUserController(userService *services.UserService) *UserController {
+func NewUserController(userService *application_service.UserService) *UserController {
 	return &UserController{userService: userService}
 }
 

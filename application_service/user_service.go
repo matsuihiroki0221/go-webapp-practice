@@ -1,8 +1,8 @@
-package services
+package application_service
 
 import (
-	"go-webapp-practice/internal/models"
-	"go-webapp-practice/internal/repositories"
+	"go-webapp-practice/domain/models"
+	"go-webapp-practice/infrastructure/repositories"
 )
 
 type UserService struct {

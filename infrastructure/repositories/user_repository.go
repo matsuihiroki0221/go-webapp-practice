@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"go-webapp-practice/internal/models"
+	"go-webapp-practice/domain/models"
 
 	"gorm.io/gorm"
 )

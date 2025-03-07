@@ -1,9 +1,9 @@
 package main
 
 import (
-	"go-webapp-practice/internal"
-	"go-webapp-practice/internal/controllers"
-	"go-webapp-practice/internal/db"
+	"go-webapp-practice/infrastructure/db"
+	"go-webapp-practice/presentation"
+	"go-webapp-practice/presentation/controller"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -17,10 +17,10 @@ func TestHealthCheckRoute(t *testing.T) {
 	db.Init()
 
 	// 依存関係の注入
-	controllers.InitializeControllers()
+	controller.Initializecontroller()
 
 	router := gin.Default()
-	internal.SetupRouter(router)
+	presentation.SetupRouter(router)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/healthcheck", nil)

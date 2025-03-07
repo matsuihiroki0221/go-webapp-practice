@@ -3,7 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"go-webapp-practice/config"
+	"go-webapp-practice/infrastructure"
 	"log"
 	"net"
 
@@ -13,7 +13,7 @@ import (
 )
 
 // CreateDatabase はデータベースが存在しない場合に作成
-func CreateDatabase(cfg *config.DBConfig) {
+func CreateDatabase(cfg *infrastructure.DBConfig) {
 
 	db, err := sql.Open("mysql", cfg.GetDSN())
 	if err != nil {
@@ -38,8 +38,8 @@ func CreateDatabase(cfg *config.DBConfig) {
 	log.Println("Database ensured:", cfg.DBName)
 }
 
-// RunMigrations はマイグレーションを実行
-func RunMigrations(cfg *config.DBConfig) {
+// RunMigration はマイグレーションを実行
+func RunMigration(cfg *infrastructure.DBConfig) {
 
 	db, err := sql.Open("mysql", cfg.GetDSN())
 	if err != nil {
@@ -54,7 +54,7 @@ func RunMigrations(cfg *config.DBConfig) {
 
 	m, err := migrate.NewWithDatabaseInstance(
 
-		"file://internal/db/migrations", // マイグレーションファイルのパス
+		"file://infrastructure/db/migration", // マイグレーションファイルのパス
 		"mysql", driver,
 	)
 	if err != nil {

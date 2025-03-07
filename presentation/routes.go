@@ -1,8 +1,8 @@
-package internal
+package presentation
 
 import (
-	"go-webapp-practice/internal/controllers"
-	"go-webapp-practice/internal/middleware"
+	"go-webapp-practice/presentation/controller"
+	"go-webapp-practice/presentation/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,8 +28,8 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	authRequired := api.Group("/")
 	authRequired.Use(middleware.Auth0Middleware())
 	{
-		authRequired.POST("/users", controllers.UserCtrller.CreateUser)
-		authRequired.GET("/users/:id", controllers.UserCtrller.GetUser)
+		authRequired.POST("/users", controller.UserCtrller.CreateUser)
+		authRequired.GET("/users/:id", controller.UserCtrller.GetUser)
 	}
 
 	// Returns index.html for requests that do not match any path

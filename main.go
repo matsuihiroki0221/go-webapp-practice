@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-webapp-practice/internal"
-	"go-webapp-practice/internal/controllers"
-	"go-webapp-practice/internal/db"
+	"go-webapp-practice/infrastructure/db"
+	"go-webapp-practice/presentation"
+	"go-webapp-practice/presentation/controller"
 	"log"
 	"net/http"
 	"os"
@@ -21,7 +21,7 @@ func main() {
 	db.Init()
 
 	// 依存関係の注入
-	controllers.InitializeControllers()
+	controller.Initializecontroller()
 
 	router := gin.Default()
 	router.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
@@ -38,7 +38,7 @@ func main() {
 			param.ErrorMessage,
 		)
 	}))
-	internal.SetupRouter(router)
+	presentation.SetupRouter(router)
 
 	srv := &http.Server{
 		Addr:    ":8080",

@@ -1,7 +1,7 @@
 package db
 
 import (
-	"go-webapp-practice/config"
+	"go-webapp-practice/infrastructure"
 	"log"
 
 	"gorm.io/driver/mysql"
@@ -11,13 +11,13 @@ import (
 var DB *gorm.DB
 
 func Init() {
-	cfg := config.LoadDBConfig()
+	cfg := infrastructure.LoadDBConfig()
 
 	// データベースを作成
 	CreateDatabase(cfg)
 
 	// マイグレーションを実行
-	RunMigrations(cfg)
+	RunMigration(cfg)
 
 	// DB接続
 	db, err := gorm.Open(mysql.Open(cfg.GetDSN()), &gorm.Config{})
