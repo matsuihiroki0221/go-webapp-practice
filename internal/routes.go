@@ -7,26 +7,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// SetupRouter ルーティングのセットアップ
+// Routing Setup
 func SetupRouter(r *gin.Engine) *gin.Engine {
 
 	r.GET("/healthcheck", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "pong",
+			"message": "ok",
 		})
 	})
 
-	// 静的ファイルの公開
+	// Static File Publishing
 	r.Static("/assets", "./public/assets")
-	// ルートパスでindex.htmlを公開
+	// Publish index.html with root path
 	r.StaticFile("/", "./public/index.html")
 
 	// APIグループ
 	api := r.Group("/api")
 
-	// 依存関係の注入
-
-	// 認証が必要なエンドポイント
+	// Endpoints requiring authentication
 	authRequired := api.Group("/")
 	authRequired.Use(middleware.Auth0Middleware())
 	{
@@ -34,7 +32,7 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 		authRequired.GET("/users/:id", controllers.UserCtrller.GetUser)
 	}
 
-	// 該当しないリクエストパスにはindex.htmlを返却
+	// Returns index.html for requests that do not match any path
 	r.NoRoute(func(c *gin.Context) {
 		c.File("./public/index.html")
 	})
