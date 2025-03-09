@@ -2,22 +2,26 @@ package application
 
 import (
 	"go-webapp-practice/domain/models"
-	"go-webapp-practice/infrastructure/repositories"
 )
 
 type UserService struct {
-	userRepo *repositories.UserRepository
+	userRepository UserRepository
 }
 
-func NewUserService(userRepo *repositories.UserRepository) *UserService {
-	return &UserService{userRepo: userRepo}
+type UserRepository interface {
+	Save(user *models.User) error
+	FindByID(id uint) (*models.User, error)
 }
 
-func (s *UserService) CreateUser(name, email, password string) error {
-	user := &models.User{Name: name, Email: email, Password: password}
-	return s.userRepo.Create(user)
+// [アプリケーション層]  →  [ドメイン層]  ←  [インフラ層]
+func NewUserService(userRepo UserRepository) *UserService {
+	return &UserService{userRepository: userRepo}
+}
+
+func (s *UserService) CreateUser(user *models.User) error {
+	return s.userRepository.Save(user)
 }
 
 func (s *UserService) GetUser(id uint) (*models.User, error) {
-	return s.userRepo.FindByID(id)
+	return s.userRepository.FindByID(id)
 }

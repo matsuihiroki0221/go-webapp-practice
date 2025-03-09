@@ -1,8 +1,11 @@
 package models
 
 type User struct {
-	ID       uint   `gorm:"primaryKey"`
-	Name     string `gorm:"size:255;not null"`
-	Email    string `gorm:"unique;not null"`
-	Password string `gorm:"not null"`
+	ID      int
+	Auth0ID string
+	Name    string
+}
+
+func NewUser(auth0Id, name string) *User {
+	return &User{Auth0ID: auth0Id, Name: name}
 }
