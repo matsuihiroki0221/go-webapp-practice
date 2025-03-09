@@ -10,6 +10,8 @@ import (
 // Routing Setup
 func SetupRouter(r *gin.Engine) *gin.Engine {
 
+	userController := controller.GetUserController()
+
 	r.GET("/healthcheck", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "ok",
@@ -28,8 +30,8 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	authRequired := api.Group("/")
 	authRequired.Use(middleware.Auth0Middleware())
 	{
-		authRequired.POST("/users", controller.UserCtrller.CreateUser)
-		authRequired.GET("/users/:id", controller.UserCtrller.GetUser)
+		authRequired.POST("/users", userController.CreateUser)
+		authRequired.GET("/users/:id", userController.GetUser)
 	}
 
 	// Returns index.html for requests that do not match any path

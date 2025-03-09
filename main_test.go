@@ -3,7 +3,6 @@ package main
 import (
 	"go-webapp-practice/infrastructure/db"
 	"go-webapp-practice/presentation"
-	"go-webapp-practice/presentation/controller"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -15,9 +14,6 @@ import (
 // Test for GET /healthcheck
 func TestHealthCheckRoute(t *testing.T) {
 	db.Init()
-
-	// 依存関係の注入
-	controller.Initializecontroller()
 
 	router := gin.Default()
 	presentation.SetupRouter(router)

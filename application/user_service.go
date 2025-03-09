@@ -1,4 +1,4 @@
-package application_service
+package application
 
 import (
 	"go-webapp-practice/domain/models"

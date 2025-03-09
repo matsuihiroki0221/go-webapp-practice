@@ -4,16 +4,25 @@ import (
 	"net/http"
 	"strconv"
 
-	application_service "go-webapp-practice/application_service"
+	"go-webapp-practice/application"
+	"go-webapp-practice/infrastructure/db"
+	"go-webapp-practice/infrastructure/repositories"
 
 	"github.com/gin-gonic/gin"
 )
 
 type UserController struct {
-	userService *application_service.UserService
+	userService *application.UserService
 }
 
-func NewUserController(userService *application_service.UserService) *UserController {
+func GetUserController() *UserController {
+	// TODO: use interface
+	userRepository := repositories.NewUserRepository(db.DB)
+	userService := application.NewUserService(userRepository)
+	return NewUserController(userService)
+}
+
+func NewUserController(userService *application.UserService) *UserController {
 	return &UserController{userService: userService}
 }
 

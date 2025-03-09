@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"go-webapp-practice/infrastructure/db"
 	"go-webapp-practice/presentation"
-	"go-webapp-practice/presentation/controller"
 	"log"
 	"net/http"
 	"os"
@@ -19,9 +18,6 @@ import (
 func main() {
 
 	db.Init()
-
-	// 依存関係の注入
-	controller.Initializecontroller()
 
 	router := gin.Default()
 	router.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
