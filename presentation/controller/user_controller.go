@@ -17,7 +17,6 @@ type UserController struct {
 }
 
 func GetUserController() *UserController {
-	// TODO: use interface
 	userRepository := repositories.NewUserRepository(db.DB)
 	userService := application.NewUserService(userRepository)
 	return NewUserController(userService)

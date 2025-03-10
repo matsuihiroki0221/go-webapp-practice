@@ -14,8 +14,8 @@ type UserRepository interface {
 }
 
 // [アプリケーション層]  →  [ドメイン層]  ←  [インフラ層]
-func NewUserService(userRepo UserRepository) *UserService {
-	return &UserService{userRepository: userRepo}
+func NewUserService(userRepopository UserRepository) *UserService {
+	return &UserService{userRepository: userRepopository}
 }
 
 func (s *UserService) CreateUser(user *models.User) error {

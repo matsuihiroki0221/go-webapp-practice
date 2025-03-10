@@ -17,7 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/web-app-practice",
+            "outputPath": "../public",
+            "baseHref": "/",
+            "deployUrl": "/assets/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -95,8 +97,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "ff19bcd5-39ee-4eb4-92c7-b40d45e155a5",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

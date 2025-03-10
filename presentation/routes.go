@@ -19,9 +19,9 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	})
 
 	// Static File Publishing
-	r.Static("/assets", "./public/assets")
+	r.Static("/assets", "./public/browser")
 	// Publish index.html with root path
-	r.StaticFile("/", "./public/index.html")
+	r.StaticFile("/", "./public/browser/index.html")
 
 	// APIグループ
 	api := r.Group("/api")
@@ -36,7 +36,7 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 
 	// Returns index.html for requests that do not match any path
 	r.NoRoute(func(c *gin.Context) {
-		c.File("./public/index.html")
+		c.File("./public/browser/index.html")
 	})
 
 	return r
