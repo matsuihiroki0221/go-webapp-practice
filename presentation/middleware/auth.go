@@ -15,8 +15,8 @@ import (
 )
 
 var (
-	auth0Domain = os.Getenv("VITE_AUTH0_DOMAIN")       // Auth0のドメイン
-	audience    = os.Getenv("VITE_AUTH0_API_AUDIENCE") // Auth0で設定したAPIのオーディエンス
+	auth0Domain = os.Getenv("AUTH0_DOMAIN")       // Auth0のドメイン
+	audience    = os.Getenv("AUTH0_API_AUDIENCE") // Auth0で設定したAPIのオーディエンス
 	// jwtValidator    *validator.Validator
 	auth0Middleware *jwtmiddleware.JWTMiddleware
 )

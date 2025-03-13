@@ -21,7 +21,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"angular.ng-template"
+				"angular.ng-template",
+				"esbenp.prettier-vscode"
 			]
 		}
 	}

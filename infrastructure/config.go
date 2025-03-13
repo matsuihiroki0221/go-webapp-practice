@@ -35,6 +35,21 @@ func (c *DBConfig) GetDSN() string {
 	return dsn
 }
 
+// DBConfig 構造体
+type AUTH0Config struct {
+	Domain   string `json:"domain"`
+	ClientID string `json:"clientId"`
+	Audience string `json:"audience"`
+}
+
+func LoadAUTH0Config() *AUTH0Config {
+	return &AUTH0Config{
+		Domain:   getEnv("AUTH0_DOMAIN", ""),
+		ClientID: getEnv("AUTH0_WEBAPP_CLIENT_ID", ""),
+		Audience: getEnv("AUTH0_API_AUDIENCE", ""),
+	}
+}
+
 // getEnv 環境変数を取得（デフォルト値あり）
 func getEnv(key, defaultValue string) string {
 	if value, exists := os.LookupEnv(key); exists {

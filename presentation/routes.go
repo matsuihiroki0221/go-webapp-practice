@@ -1,8 +1,11 @@
 package presentation
 
 import (
+	"go-webapp-practice/infrastructure"
 	"go-webapp-practice/presentation/controller"
 	"go-webapp-practice/presentation/middleware"
+
+	"github.com/gin-contrib/cors"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,6 +14,14 @@ import (
 func SetupRouter(r *gin.Engine) *gin.Engine {
 
 	userController := controller.GetUserController()
+
+	// CORS 設定
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:4200"}, // Angular 側のURL
+		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		AllowCredentials: true,
+	}))
 
 	r.GET("/healthcheck", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -25,6 +36,10 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 
 	// APIグループ
 	api := r.Group("/api")
+	api.GET("/config", func(c *gin.Context) {
+		auth0Config := infrastructure.LoadAUTH0Config()
+		c.JSON(200, auth0Config)
+	})
 
 	// Endpoints requiring authentication
 	authRequired := api.Group("/")
