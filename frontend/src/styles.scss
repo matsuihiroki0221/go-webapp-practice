@@ -1,12 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+@use "tailwindcss";
+
+// Primary Blue Colors
+$blue-50: #e3f2fd;
+$blue-100: #bbdefb;
+$blue-200: #90caf9;
+$blue-300: #64b5f6;
+$blue-400: #42a5f5;
+$blue-500: #2196f3; // Primary
+$blue-600: #1e88e5;
+$blue-700: #1976d2;
+$blue-800: #1565c0;
+$blue-900: #0d47a1;
+
+// Accent & Secondary Blues
+$cyan-50: #e0f7fa;
+$cyan-100: #b2ebf2;
+$cyan-200: #80deea;
+$cyan-300: #4dd0e1;
+$cyan-400: #26c6da;
+$cyan-500: #00bcd4; // Secondary
+$cyan-600: #00acc1;
+$cyan-700: #0097a7;
+$cyan-800: #00838f;
+$cyan-900: #006064;
+
+// **ヘッダー**
+$header-bg: #2a3f5f;
+$header-text: #ffffff;
+
+// **サイドナビ**
+$sidenav-bg: #f5f5f5;
+$sidenav-text: #363e42;
+// **メインコンテンツ**
+$main-bg: #f5f5f5;
+$main-text: #363e42;
+
+// **アクセント**
+$primary-blue: #3a5f8f;
+$secondary-blue: #5a7fa8;
+$border-color: #ccd6e0;
+$border-color-gray: #c1c0c3;
+
+$sidenav-width: 360px;
 
 html,
 body {
@@ -15,4 +50,5 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: $main-bg;
 }

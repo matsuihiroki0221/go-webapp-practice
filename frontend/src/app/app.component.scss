@@ -1,0 +1,36 @@
+@use "../styles" as *;
+
+::ng-deep .mat-toolbar {
+  font-size: 20px !important;
+  font-weight: bold !important;
+  color: $header-text !important; // 例: 青色に変更
+  background-color: $header-bg !important;
+}
+
+::ng-deep .mat-icon,
+mat-icon.mat-primary,
+mat-icon.mat-accent,
+mat-icon.mat-warn {
+  color: $header-text;
+}
+
+::ng-deep .mat-drawer {
+  background-color: $sidenav-bg !important;
+  color: $sidenav-text !important;
+  border-right: 1px solid $border-color-gray !important;
+  border-radius: 0% !important;
+  height: 100%;
+}
+
+::ng-deep .mat-drawer-container {
+  background-color: $sidenav-bg !important;
+  color: $sidenav-text !important;
+}
+
+::ng-deep .mat-drawer-container {
+  height: 100%;
+}
+
+::ng-deep .mat-drawer-content {
+  z-index: 3 !important;
+}

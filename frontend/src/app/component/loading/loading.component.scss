@@ -1,0 +1,27 @@
+@use "../../../styles" as *;
+
+// html と body にスタイルを追加
+html,
+body {
+  height: 100%; /* 画面全体の高さを確保 */
+  margin: 0; /* デフォルトのマージンを削除 */
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* 横幅を画面全体に */
+  height: 100vh; /* 高さを画面全体に */
+  flex-direction: column;
+  text-align: center;
+  position: fixed; /* 画面全体を覆うためにfixedに設定 */
+  top: 0; /* 上部に固定 */
+  left: 0; /* 左端に固定 */
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒背景 */
+  z-index: 9999; /* 他の要素より前面に表示 */
+}
+
+mat-spinner {
+  margin-bottom: 10px;
+}

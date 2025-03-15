@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+
+// Import the authentication guard
+// import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent }, // /login で表示
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // デフォルトで /login にリダイレクト
+  { path: '', component: HomeComponent },
+  { path: '**', redirectTo: '' },
 ];
 
 export default routes;
