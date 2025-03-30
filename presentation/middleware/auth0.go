@@ -86,7 +86,8 @@ func Auth0Middleware() gin.HandlerFunc {
 		checkJWTHandler.ServeHTTP(c.Writer, c.Request)
 
 		if c.Writer.Status() == http.StatusUnauthorized {
-			c.Abort()
+			// uncomment out if you want authentication errors to be returned
+			// c.Abort()
 			return
 		}
 
@@ -95,7 +96,8 @@ func Auth0Middleware() gin.HandlerFunc {
 		validatedClaims, ok := c.Request.Context().Value(jwtmiddleware.ContextKey{}).(*validator.ValidatedClaims)
 		if !ok {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token claims"})
-			c.Abort()
+			// uncomment out if you want authentication errors to be returned
+			// c.Abort()
 			return
 		}
 
@@ -104,11 +106,13 @@ func Auth0Middleware() gin.HandlerFunc {
 		customClaims, ok := validatedClaims.CustomClaims.(*customClaims)
 		if !ok {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid custom claims"})
-			c.Abort()
+			// uncomment out if you want authentication errors to be returned
+			// c.Abort()
 			return
 		}
 
 		// Gin Contextに保存
+		c.Set("userId", validatedClaims.RegisteredClaims.Subject)
 		c.Set("permissions", customClaims.Permissions)
 		c.Set("registeredClaims", validatedClaims.RegisteredClaims)
 

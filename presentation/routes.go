@@ -17,8 +17,8 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 
 	// CORS 設定
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:4200"}, // Angular 側のURL
-		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+		AllowOrigins:     []string{"http://localhost:4200"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Content-Type", "Authorization"},
 		AllowCredentials: true,
 	}))
@@ -30,9 +30,9 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	})
 
 	// Static File Publishing
-	r.Static("/assets", "./public/browser")
+	r.Static("/assets", "./presentation/public/browser")
 	// Publish index.html with root path
-	r.StaticFile("/", "./public/browser/index.html")
+	r.StaticFile("/", "./presentation/public/browser/index.html")
 
 	// APIグループ
 	api := r.Group("/api")
@@ -43,9 +43,9 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 
 	// Endpoints requiring authentication
 	authRequired := api.Group("/")
-	authRequired.Use(middleware.Auth0Middleware())
+	authRequired.Use(middleware.Auth0Middleware(), middleware.FinalAuthMiddleware(userController))
 	{
-		authRequired.POST("/users", userController.CreateUser)
+		// authRequired.POST("/users", userController.CreateUser)
 		authRequired.GET("/users/:id", userController.GetUser)
 	}
 

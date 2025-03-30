@@ -11,26 +11,29 @@ type UserRepositoryImpl struct {
 }
 
 type UserEntity struct {
-	ID      int `gorm:"primaryKey"`
-	Auth0ID string
-	Name    string
+	Id           uint   `gorm:"primaryKey"`
+	ProviderId   string `gorm:"uniqueIndex:idx_provider"` // Auth0やGoogleのID
+	ProviderName string `gorm:"uniqueIndex:idx_provider"` // "auth0", "google" など
+	UserName     string
 }
 
 // Entity → Domain（インフラ層で変換）
 func (u *UserEntity) ToDomain() *models.User {
 	return &models.User{
-		ID:      u.ID,
-		Auth0ID: u.Auth0ID,
-		Name:    u.Name,
+		Id:           u.Id,
+		ProviderId:   u.ProviderId,
+		ProviderName: u.UserName,
+		UserName:     u.UserName,
 	}
 }
 
 // Domain → Entity（インフラ層で変換）
 func FromDomain(user *models.User) *UserEntity {
 	return &UserEntity{
-		ID:      user.ID,
-		Auth0ID: user.Auth0ID,
-		Name:    user.Name,
+		Id:           user.Id,
+		ProviderId:   user.ProviderId,
+		ProviderName: user.ProviderName,
+		UserName:     user.UserName,
 	}
 }
 
@@ -47,6 +50,14 @@ func (r *UserRepositoryImpl) Save(user *models.User) error {
 func (r *UserRepositoryImpl) FindByID(id uint) (*models.User, error) {
 	var entity UserEntity
 	if err := r.db.First(&entity, id).Error; err != nil {
+		return nil, err
+	}
+	return entity.ToDomain(), nil // エンティティ → ドメインモデル変換
+}
+
+func (r *UserRepositoryImpl) FindByProviderID(providerId, providerName string) (*models.User, error) {
+	var entity UserEntity
+	if err := r.db.Where("provider_id = ? AND provider_name = ?", providerId, providerName).First(&entity).Error; err != nil {
 		return nil, err
 	}
 	return entity.ToDomain(), nil // エンティティ → ドメインモデル変換

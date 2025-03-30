@@ -11,6 +11,7 @@ type UserService struct {
 type UserRepository interface {
 	Save(user *models.User) error
 	FindByID(id uint) (*models.User, error)
+	FindByProviderID(providerId, providerName string) (*models.User, error)
 }
 
 // [アプリケーション層]  →  [ドメイン層]  ←  [インフラ層]
@@ -24,4 +25,7 @@ func (s *UserService) CreateUser(user *models.User) error {
 
 func (s *UserService) GetUser(id uint) (*models.User, error) {
 	return s.userRepository.FindByID(id)
+}
+func (s *UserService) GetUserByProviderID(providerId, providerName string) (*models.User, error) {
+	return s.userRepository.FindByProviderID(providerId, providerName)
 }

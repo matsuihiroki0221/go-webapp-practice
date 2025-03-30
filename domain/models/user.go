@@ -1,11 +1,17 @@
 package models
 
 type User struct {
-	ID      int
-	Auth0ID string
-	Name    string
+	Id           uint
+	ProviderId   string
+	ProviderName string
+	UserName     string
 }
 
-func NewUser(auth0Id, name string) *User {
-	return &User{Auth0ID: auth0Id, Name: name}
+func NewUser(id uint, providerId, providerName, UserName string) *User {
+	return &User{
+		Id:           id,
+		ProviderId:   providerId,
+		ProviderName: providerName,
+		UserName:     UserName,
+	}
 }
